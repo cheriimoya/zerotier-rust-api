@@ -281,6 +281,57 @@
             "$ref": "#/components/responses/UnauthorizedError"
           }
         }
+      },
+      "post": {
+        "tags": ["controller"],
+        "summary": "Update Network Member by ID",
+        "operationId": "updateNetworkMember",
+        "parameters": [
+          {
+            "name": "networkID",
+            "description": "ID of the network.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nodeID",
+            "description": "ID of the member node.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Member Status",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberAuthorization"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControllerNetworkMember"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
       }
     },
     "/status": {
@@ -647,6 +698,14 @@
           },
           "remoteTraceLevel": {
             "type": "integer"
+          }
+        }
+      },
+      "MemberAuthorization": {
+        "type": "object",
+        "properties": {
+          "authorized": {
+            "type": "boolean"
           }
         }
       },
